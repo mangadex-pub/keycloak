@@ -19,16 +19,6 @@ jobs:
       contents: read
       packages: write
 
-    strategy:
-      matrix:
-        include:
-          - target: keycloak-vanilla
-            tag_suffix: "vanilla"
-          - target: keycloak-pgsql
-            tag_suffix: "pgsql"
-          - target: keycloak-pgsql-k8s
-            tag_suffix: "pgsql-k8s"
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -53,7 +43,7 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           flavor: |
             latest=false
-            suffix=-kc${{ env.KEYCLOAK_VERSION }}-${{ matrix.tag_suffix }}
+            suffix=-kc${{ env.KEYCLOAK_VERSION }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v3
@@ -62,7 +52,6 @@ jobs:
           push: true
           labels: ${{ steps.meta.outputs.labels }}
           tags: ${{ steps.meta.outputs.tags }}
-          target: ${{ matrix.target }}
           build-args: |
             KEYCLOAK_VERSION=${{ env.KEYCLOAK_VERSION }}
             KEYCLOAK_ARGON2_VERSION=${{ env.KEYCLOAK_ARGON2_VERSION }}

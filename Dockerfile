@@ -34,7 +34,7 @@ ADD ${KEYCLOAK_BCRYPT_DIST} "/opt/keycloak/providers/keycloak-bcrypt-${KEYCLOAK_
 
 RUN chmod -v 0644 /opt/keycloak/providers/*.jar
 
-FROM keycloak-jdk as keycloak-vanilla
+FROM keycloak-jdk
 
 RUN echo "keycloak:x:0:root" >> /etc/group && echo "keycloak:x:1000:0:keycloak user:/opt/keycloak:/sbin/nologin" >> /etc/passwd
 USER 1000
@@ -42,30 +42,3 @@ USER 1000
 COPY --from=keycloak-dist --chown=1000:0 /opt/keycloak /opt/keycloak
 
 ENTRYPOINT [ "/opt/keycloak/bin/kc.sh" ]
-
-FROM keycloak-vanilla as keycloak-mangadex
-
-ENV KC_DB=postgres
-ENV KC_HEALTH_ENABLED=true
-ENV KC_METRICS_ENABLED=true
-
-# Comma-separated
-ENV KC_FEATURES="declarative-user-profile"
-
-WORKDIR /opt/keycloak
-ENTRYPOINT ["/opt/keycloak/bin/kc.sh", "start", "--optimized"]
-
-FROM keycloak-mangadex as keycloak-pgsql
-
-ENV KC_CACHE=local
-
-RUN /opt/keycloak/bin/kc.sh build && \
-    /opt/keycloak/bin/kc.sh show-config
-
-FROM keycloak-mangadex as keycloak-pgsql-k8s
-
-ENV KC_CACHE=ispn
-ENV KC_CACHE_STACK=kubernetes
-
-RUN /opt/keycloak/bin/kc.sh build && \
-    /opt/keycloak/bin/kc.sh show-config
