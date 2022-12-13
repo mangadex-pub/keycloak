@@ -21,7 +21,7 @@ BCrypt support from: https://github.com/mangadex-pub/keycloak-bcrypt
 Three flavours of image are produced:
 
 1. A "vanilla" image, without extra configuration on top of the official distribution:
-    - `$TAG-kc$KEYCLOAK_VERSION`
+    - `$TAG-kc$KEYCLOAK_VERSION-vanilla`
 2. A PostgreSQL-configured cache-less image (mainly for local development):
     - `$TAG-kc$KEYCLOAK_VERSION-pgsql`
 3. A PostgreSQL + Kubernetes Infinispan configured image (for our production runtime):
