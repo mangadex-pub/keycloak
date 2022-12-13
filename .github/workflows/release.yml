@@ -23,11 +23,11 @@ jobs:
       matrix:
         include:
           - target: keycloak-vanilla
-            tag_suffix: ""
+            tag_suffix: "vanilla"
           - target: keycloak-pgsql
-            tag_suffix: "-pgsql"
+            tag_suffix: "pgsql"
           - target: keycloak-pgsql-k8s
-            tag_suffix: "-pgsql-k8s"
+            tag_suffix: "pgsql-k8s"
 
     steps:
       - name: Checkout repository
@@ -53,7 +53,7 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           flavor: |
             latest=false
-            suffix=kc${{ env.KEYCLOAK_VERSION }}-${{ matrix.tag_suffix }}
+            suffix=-kc${{ env.KEYCLOAK_VERSION }}-${{ matrix.tag_suffix }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v3
