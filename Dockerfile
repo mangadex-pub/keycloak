@@ -32,6 +32,10 @@ ARG KEYCLOAK_BCRYPT_VERSION="1.5.3"
 ARG KEYCLOAK_BCRYPT_DIST="https://github.com/mangadex-pub/keycloak-bcrypt/releases/download/${KEYCLOAK_BCRYPT_VERSION}/keycloak-bcrypt-${KEYCLOAK_BCRYPT_VERSION}.jar"
 ADD ${KEYCLOAK_BCRYPT_DIST} "/opt/keycloak/providers/keycloak-bcrypt-${KEYCLOAK_BCRYPT_VERSION}.jar"
 
+ARG KEYCLOAK_MANGADEX_VERSION="0.0.2"
+ARG KEYCLOAK_MANGADEX_DIST="https://github.com/mangadex-pub/keycloak-mangadex/releases/download/${KEYCLOAK_MANGADEX_VERSION}/keycloak-mangadex-${KEYCLOAK_MANGADEX_VERSION}.jar"
+ADD ${KEYCLOAK_MANGADEX_DIST} "/opt/keycloak/providers/keycloak-mangadex-${KEYCLOAK_MANGADEX_VERSION}.jar"
+
 RUN chmod -v 0644 /opt/keycloak/providers/*.jar
 
 FROM keycloak-jdk as keycloak-vanilla
