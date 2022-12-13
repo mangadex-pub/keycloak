@@ -45,16 +45,20 @@ ENTRYPOINT [ "/opt/keycloak/bin/kc.sh" ]
 
 FROM keycloak-vanilla as keycloak-mangadex
 
+USER root
+ARG KEYCLOAK_MANGADEX_VERSION="0.0.2"
+ARG KEYCLOAK_MANGADEX_DIST="https://github.com/mangadex-pub/keycloak-mangadex/releases/download/${KEYCLOAK_MANGADEX_VERSION}/keycloak-mangadex-${KEYCLOAK_MANGADEX_VERSION}.jar"
+ADD ${KEYCLOAK_MANGADEX_DIST} "/opt/keycloak/providers/keycloak-mangadex-${KEYCLOAK_MANGADEX_VERSION}.jar"
+RUN chmod -v 0644 /opt/keycloak/providers/*.jar
+
+USER 1000
+
 ENV KC_DB=postgres
 ENV KC_HEALTH_ENABLED=true
 ENV KC_METRICS_ENABLED=true
 
 # Comma-separated
 ENV KC_FEATURES="declarative-user-profile"
-
-ARG KEYCLOAK_MANGADEX_VERSION="0.0.2"
-ARG KEYCLOAK_MANGADEX_DIST="https://github.com/mangadex-pub/keycloak-mangadex/releases/download/${KEYCLOAK_MANGADEX_VERSION}/keycloak-mangadex-${KEYCLOAK_MANGADEX_VERSION}.jar"
-ADD ${KEYCLOAK_MANGADEX_DIST} "/opt/keycloak/providers/keycloak-mangadex-${KEYCLOAK_MANGADEX_VERSION}.jar"
 
 WORKDIR /opt/keycloak
 ENTRYPOINT ["/opt/keycloak/bin/kc.sh", "start", "--optimized"]
