@@ -10,7 +10,7 @@ the latest possible JDK that Keycloak supports.
 
 - Current JDK: 11, until https://github.com/keycloak/keycloak/issues/15607 is fixed
 
-This this what this repo mainly aims to provide.
+For continued support of legacy user credentials, we need to support some out-of-tree hash algorithms as well, and this is what this image provides us.
 
 ## Password hash providers included
 
@@ -20,11 +20,9 @@ BCrypt support from: https://github.com/mangadex-pub/keycloak-bcrypt
 
 ## Images and tags published
 
-Three flavours of image are produced:
+Images are published with the tag `$TAG-kc$KEYCLOAK_VERSION`.
 
-1. A "vanilla" image, without extra configuration on top of the official distribution:
-    - `$TAG-kc$KEYCLOAK_VERSION-vanilla`
-2. A PostgreSQL-configured cache-less image (mainly for local development):
-    - `$TAG-kc$KEYCLOAK_VERSION-pgsql`
-3. A PostgreSQL + Kubernetes Infinispan configured image (for our production runtime):
-    - `$TAG-kc$KEYCLOAK_VERSION-pgsql-k8s`
+For example
+
+    ghcr.io/mangadex-pub/keycloak:1.0.4-20.0.2
+

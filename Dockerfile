@@ -13,7 +13,7 @@ FROM registry.access.redhat.com/ubi8-minimal AS keycloak-dist
 
 RUN microdnf install -y tar gzip
 
-ARG KEYCLOAK_VERSION="20.0.1"
+ARG KEYCLOAK_VERSION="20.0.2"
 ARG KEYCLOAK_DIST="https://github.com/keycloak/keycloak/releases/download/${KEYCLOAK_VERSION}/keycloak-${KEYCLOAK_VERSION}.tar.gz"
 ADD ${KEYCLOAK_DIST} /tmp/keycloak/
 
