@@ -8,6 +8,8 @@ Additionally, we always run on mainline runtimes, or at least latest LTS. And at
 for Java 17. We appreciate that some ~~damaged~~ people will stick to abandonware like their life depends on it, but this isn't our style. So we will always run
 the latest possible JDK that Keycloak supports.
 
+- Current JDK: 11, until https://github.com/keycloak/keycloak/issues/15607 is fixed
+
 This this what this repo mainly aims to provide.
 
 ## Password hash providers included

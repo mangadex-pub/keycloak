@@ -5,7 +5,7 @@ FROM registry.access.redhat.com/ubi8-minimal as keycloak-jdk
 ENV LANG en_US.UTF-8
 
 RUN microdnf update -y && \
-    microdnf install -y --nodocs java-17-openjdk-headless glibc-langpack-en && \
+    microdnf install -y --nodocs java-11-openjdk-headless glibc-langpack-en && \
     microdnf clean all && \
     rm -rf /var/cache/yum/*
 
@@ -24,11 +24,11 @@ RUN tar -xvf /tmp/keycloak/keycloak-*.tar.gz && \
     mkdir -p /opt/keycloak/data && \
     chmod -R g+rwX /opt/keycloak
 
-ARG KEYCLOAK_ARGON2_VERSION="3.0.2"
+ARG KEYCLOAK_ARGON2_VERSION="3.0.3"
 ARG KEYCLOAK_ARGON2_DIST="https://github.com/mangadex-pub/keycloak-argon2/releases/download/${KEYCLOAK_ARGON2_VERSION}/keycloak-argon2-${KEYCLOAK_ARGON2_VERSION}.jar"
 ADD ${KEYCLOAK_ARGON2_DIST} "/opt/keycloak/providers/keycloak-argon2-${KEYCLOAK_ARGON2_VERSION}.jar"
 
-ARG KEYCLOAK_BCRYPT_VERSION="1.5.2"
+ARG KEYCLOAK_BCRYPT_VERSION="1.5.3"
 ARG KEYCLOAK_BCRYPT_DIST="https://github.com/mangadex-pub/keycloak-bcrypt/releases/download/${KEYCLOAK_BCRYPT_VERSION}/keycloak-bcrypt-${KEYCLOAK_BCRYPT_VERSION}.jar"
 ADD ${KEYCLOAK_BCRYPT_DIST} "/opt/keycloak/providers/keycloak-bcrypt-${KEYCLOAK_BCRYPT_VERSION}.jar"
 
