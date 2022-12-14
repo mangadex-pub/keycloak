@@ -9,7 +9,7 @@ env:
   REGISTRY: "ghcr.io"
   IMAGE_NAME: "${{ github.repository }}"
   KEYCLOAK_VERSION: "20.0.2"
-  KEYCLOAK_MD_BUILD: "1"
+  KEYCLOAK_MD_BUILD: "2"
   KEYCLOAK_ARGON2_VERSION: "3.0.3"
   KEYCLOAK_BCRYPT_VERSION: "1.5.3"
 

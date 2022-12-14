@@ -14,7 +14,7 @@ FROM registry.access.redhat.com/ubi8-minimal AS keycloak-dist
 RUN microdnf install -y tar gzip
 
 ARG KEYCLOAK_VERSION="20.0.2"
-ARG KEYCLOAK_MD_BUILD="1"
+ARG KEYCLOAK_MD_BUILD="2"
 ARG KEYCLOAK_DIST="https://github.com/mangadex-pub/keycloak-upstream/releases/download/${KEYCLOAK_VERSION}-mangadex-${KEYCLOAK_MD_BUILD}/keycloak-${KEYCLOAK_VERSION}.tar.gz"
 ADD ${KEYCLOAK_DIST} /tmp/keycloak/
 
