@@ -47,7 +47,7 @@ jobs:
             suffix=-kc${{ env.KEYCLOAK_VERSION }}-md${{ env.KEYCLOAK_MD_BUILD }}
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: .
           push: true
