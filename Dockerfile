@@ -13,7 +13,7 @@ FROM registry.access.redhat.com/ubi8-minimal AS keycloak-dist
 
 RUN microdnf install -y tar gzip
 
-ARG KEYCLOAK_VERSION="20.0.2"
+ARG KEYCLOAK_VERSION="20.0.5"
 ARG KEYCLOAK_MD_BUILD="2"
 ARG KEYCLOAK_DIST="https://github.com/mangadex-pub/keycloak-upstream/releases/download/${KEYCLOAK_VERSION}-mangadex-${KEYCLOAK_MD_BUILD}/keycloak-${KEYCLOAK_VERSION}.tar.gz"
 ADD ${KEYCLOAK_DIST} /tmp/keycloak/
@@ -25,11 +25,11 @@ RUN tar -xvf /tmp/keycloak/keycloak-*.tar.gz && \
     mkdir -p /opt/keycloak/data && \
     chmod -R g+rwX /opt/keycloak
 
-ARG KEYCLOAK_ARGON2_VERSION="3.0.3"
+ARG KEYCLOAK_ARGON2_VERSION="3.0.4"
 ARG KEYCLOAK_ARGON2_DIST="https://github.com/mangadex-pub/keycloak-argon2/releases/download/${KEYCLOAK_ARGON2_VERSION}/keycloak-argon2-${KEYCLOAK_ARGON2_VERSION}.jar"
 ADD ${KEYCLOAK_ARGON2_DIST} "/opt/keycloak/providers/keycloak-argon2-${KEYCLOAK_ARGON2_VERSION}.jar"
 
-ARG KEYCLOAK_BCRYPT_VERSION="1.5.3"
+ARG KEYCLOAK_BCRYPT_VERSION="1.5.4"
 ARG KEYCLOAK_BCRYPT_DIST="https://github.com/mangadex-pub/keycloak-bcrypt/releases/download/${KEYCLOAK_BCRYPT_VERSION}/keycloak-bcrypt-${KEYCLOAK_BCRYPT_VERSION}.jar"
 ADD ${KEYCLOAK_BCRYPT_DIST} "/opt/keycloak/providers/keycloak-bcrypt-${KEYCLOAK_BCRYPT_VERSION}.jar"
 
