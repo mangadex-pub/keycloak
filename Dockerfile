@@ -6,7 +6,7 @@ RUN dnf install -y tar gzip
 ADD ubi-null.sh /tmp/
 RUN bash /tmp/ubi-null.sh java-17-openjdk-headless glibc-langpack-en
 
-ARG KEYCLOAK_VERSION="21.0.0"
+ARG KEYCLOAK_VERSION="21.1.1"
 ARG KEYCLOAK_MD_BUILD="1"
 ARG KEYCLOAK_DIST="https://github.com/mangadex-pub/keycloak-upstream/releases/download/${KEYCLOAK_VERSION}-mangadex-${KEYCLOAK_MD_BUILD}/keycloak-${KEYCLOAK_VERSION}.tar.gz"
 ADD ${KEYCLOAK_DIST} /tmp/keycloak/
@@ -18,11 +18,11 @@ RUN tar -xvf /tmp/keycloak/keycloak-*.tar.gz && \
     mkdir -p /opt/keycloak/data && \
     chmod -R g+rwX /opt/keycloak
 
-ARG KEYCLOAK_ARGON2_VERSION="3.1.0"
+ARG KEYCLOAK_ARGON2_VERSION="21.1.1-1"
 ARG KEYCLOAK_ARGON2_DIST="https://github.com/mangadex-pub/keycloak-argon2/releases/download/${KEYCLOAK_ARGON2_VERSION}/keycloak-argon2-${KEYCLOAK_ARGON2_VERSION}.jar"
 ADD ${KEYCLOAK_ARGON2_DIST} "/opt/keycloak/providers/keycloak-argon2-${KEYCLOAK_ARGON2_VERSION}.jar"
 
-ARG KEYCLOAK_BCRYPT_VERSION="1.6.0"
+ARG KEYCLOAK_BCRYPT_VERSION="21.1.1-1"
 ARG KEYCLOAK_BCRYPT_DIST="https://github.com/mangadex-pub/keycloak-bcrypt/releases/download/${KEYCLOAK_BCRYPT_VERSION}/keycloak-bcrypt-${KEYCLOAK_BCRYPT_VERSION}.jar"
 ADD ${KEYCLOAK_BCRYPT_DIST} "/opt/keycloak/providers/keycloak-bcrypt-${KEYCLOAK_BCRYPT_VERSION}.jar"
 

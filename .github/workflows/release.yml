@@ -8,10 +8,7 @@ on:
 env:
   REGISTRY: "ghcr.io"
   IMAGE_NAME: "${{ github.repository }}"
-  KEYCLOAK_VERSION: "21.0.0"
-  KEYCLOAK_MD_BUILD: "1"
-  KEYCLOAK_ARGON2_VERSION: "3.1.0"
-  KEYCLOAK_BCRYPT_VERSION: "1.6.0"
+  KEYCLOAK_VERSION: "21.1.1"
 
 jobs:
   build-images:
@@ -44,7 +41,7 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           flavor: |
             latest=false
-            suffix=-kc${{ env.KEYCLOAK_VERSION }}-md${{ env.KEYCLOAK_MD_BUILD }}
+            suffix=-kc${{ env.KEYCLOAK_VERSION }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
@@ -55,6 +52,3 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           build-args: |
             KEYCLOAK_VERSION=${{ env.KEYCLOAK_VERSION }}
-            KEYCLOAK_MD_BUILD=${{ env.KEYCLOAK_MD_BUILD }}
-            KEYCLOAK_ARGON2_VERSION=${{ env.KEYCLOAK_ARGON2_VERSION }}
-            KEYCLOAK_BCRYPT_VERSION=${{ env.KEYCLOAK_BCRYPT_VERSION }}
